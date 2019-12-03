@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 # day02.py
 """
+Advent of code day 2
+
+Copyright (c) 2019, David Hoffman
+
 --- Day 2: 1202 Program Alarm ---
 On the way to your gravity assist around the Moon, your ship computer beeps
 angrily about a "1202 program alarm". On the radio, an Elf is already explaining
