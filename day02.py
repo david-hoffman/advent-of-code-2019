@@ -77,27 +77,26 @@ What value is left at position 0 after the program halts?
 """
 
 test_inoutputs = (
-    ((1,0,0,0,99), (2,0,0,0,99)),
-    ((2,3,0,3,99), (2,3,0,6,99)),
-    ((2,4,4,5,99,0), (2,4,4,5,99,9801)),
-    ((1,1,1,4,99,5,6,0,99), (30,1,1,4,2,5,6,0,99))
+    ((1, 0, 0, 0, 99), (2, 0, 0, 0, 99)),
+    ((2, 3, 0, 3, 99), (2, 3, 0, 6, 99)),
+    ((2, 4, 4, 5, 99, 0), (2, 4, 4, 5, 99, 9801)),
+    ((1, 1, 1, 4, 99, 5, 6, 0, 99), (30, 1, 1, 4, 2, 5, 6, 0, 99)),
 )
+
 
 def add(x, y):
     return x + y
+
 
 def prod(x, y):
     return x * y
 
 
-OPCODE = {
-    1: add,
-    2: prod,
-    99: None
-}
+OPCODE = {1: add, 2: prod, 99: None}
+
 
 def compute(program):
-    '''Compute a program returning the new memory'''
+    """Compute a program returning the new memory"""
     # convert to list (make a copy so that input isn't changed)
     program = list(program)
 
@@ -111,33 +110,38 @@ def compute(program):
             return tuple(program)
         else:
             # else perform function and store result.
-            program[program[pointer + 3]] = func(program[program[pointer + 1]], program[program[pointer + 2]])
+            program[program[pointer + 3]] = func(
+                program[program[pointer + 1]], program[program[pointer + 2]]
+            )
         pointer += 4
 
+
 def test():
-    '''Test given inputs'''
+    """Test given inputs"""
     for program, result in test_inoutputs:
         assert compute(program) == result
 
+
 def result(noun, verb, program):
-    '''The result of a program given the noun and verb'''
+    """The result of a program given the noun and verb"""
     program = list(program)
-    
+
     program[1] = noun
     program[2] = verb
 
-    return(compute(program)[0])
+    return compute(program)[0]
+
 
 def main():
     # test known inputs and outputs
     test()
 
     # read in program
-    with open('day02.txt', 'r') as fn:
-        program = tuple(map(int, fn.read().split(',')))
+    with open("day02.txt", "r") as fn:
+        program = tuple(map(int, fn.read().split(",")))
 
     # first answer
-    print('Answer 1', result(12, 2, program))
+    print("Answer 1", result(12, 2, program))
 
     # make generator for pairs of nouns and verbs
     nouns_verbs = ((noun, verb) for noun in range(100) for verb in range(100))
@@ -147,9 +151,10 @@ def main():
         if result(noun, verb, program) == 19690720:
             break
     else:
-        raise Exception('Failed')
+        raise Exception("Failed")
 
-    print('Answer 2', 100 * noun + verb)
+    print("Answer 2", 100 * noun + verb)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

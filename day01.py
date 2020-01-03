@@ -73,26 +73,18 @@ the fuel requirements for each module separately, then add them all up at the
 end.)
 """
 
-test_inoutputs_part1 = (
-    (12, 2),
-    (14, 2),
-    (1969, 654),
-    (100756, 33583)
-)
+test_inoutputs_part1 = ((12, 2), (14, 2), (1969, 654), (100756, 33583))
 
-test_inoutputs_part2 = (
-    (14, 2),
-    (1969, 966),
-    (100756, 50346)
-)
+test_inoutputs_part2 = ((14, 2), (1969, 966), (100756, 50346))
+
 
 def calc_fuel(mass):
-    '''Calculae fuel only considering module mass'''
+    """Calculae fuel only considering module mass"""
     return mass // 3 - 2
 
 
 def calc_fuel2(mass):
-    '''calculate fuel considering module and feul mass'''
+    """calculate fuel considering module and feul mass"""
     total = 0
     while mass > 0:
         fuel = mass // 3 - 2
@@ -105,7 +97,7 @@ def calc_fuel2(mass):
 
 
 def test():
-    '''Test given inputs and outputs'''
+    """Test given inputs and outputs"""
     # test on given inputs and outputs
     for mass, fuel in test_inoutputs_part1:
         assert fuel == calc_fuel(mass)
@@ -115,16 +107,16 @@ def test():
 
 
 def answer(func):
-    '''Return answer based on function'''
-    with open('day01.txt', 'r') as fn:
+    """Return answer based on function"""
+    with open("day01.txt", "r") as fn:
         # convert each line to an int
         modules_masses = map(int, fn)
         # apply function and sum
         return sum(map(func, modules_masses))
 
 
-if __name__ == '__main__':
-    
+if __name__ == "__main__":
+
     # run tests
     test()
 
